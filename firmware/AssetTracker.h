@@ -34,7 +34,7 @@ class AssetTracker {
 
 };
 
-#endif
+
 
 /*
 * Copyright (C) 2008 The Android Open Source Project
@@ -482,4 +482,4 @@ class Adafruit_LIS3DH : public Adafruit_Sensor {
 };
 
 
-
+#endif
