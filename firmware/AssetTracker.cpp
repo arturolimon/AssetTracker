@@ -390,7 +390,7 @@ char Adafruit_GPS::read(void) {
 //    if(!gpsSwSerial->available()) return c;
 //    c = gpsSwSerial->read();
 //  } else 
-#endif
+//#endif
 //  {
   if(!gpsHwSerial->available()) return c;
   c = gpsHwSerial->read();
