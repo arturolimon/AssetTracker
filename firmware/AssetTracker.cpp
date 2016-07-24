@@ -3,10 +3,10 @@
 
 //----------------- Tracker ----------------//
 
-//#define mySerial Serial1
-//Adafruit_GPS gps(&mySerial);
-Adafruit_GPS gps = Adafruit_GPS();
-Adafruit_LIS3DH accel = Adafruit_LIS3DH(A2, A5, A4, A3);
+#define mySerial Serial1
+Adafruit_GPS gps(&mySerial);
+//Adafruit_GPS gps = Adafruit_GPS();
+//Adafruit_LIS3DH accel = Adafruit_LIS3DH(A2, A5, A4, A3);
 
 AssetTracker::AssetTracker(){
 
