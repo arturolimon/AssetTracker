@@ -279,14 +279,15 @@ class Adafruit_GPS {
  public:
   void begin(uint16_t baud); 
 
-#ifdef __AVR__
-  #if ARDUINO >= 100 
-    Adafruit_GPS(SoftwareSerial *ser); // Constructor when using SoftwareSerial
-  #else
-    Adafruit_GPS(NewSoftSerial  *ser); // Constructor when using NewSoftSerial
-  #endif
-#endif
-  Adafruit_GPS(); // Constructor when using HardwareSerial
+//#ifdef __AVR__
+//  #if ARDUINO >= 100 
+//    Adafruit_GPS(SoftwareSerial *ser); // Constructor when using SoftwareSerial
+//  #else
+//    Adafruit_GPS(NewSoftSerial  *ser); // Constructor when using NewSoftSerial
+//  #endif
+//#endif
+
+ Adafruit_GPS(Stream *ser); // Constructor when using HardwareSerial
 
   char *lastNMEA(void);
   boolean newNMEAreceived();
