@@ -441,9 +441,9 @@ Adafruit_GPS::Adafruit_GPS(NewSoftSerial *ser)
 #endif
 
 // Constructor when using HardwareSerial
-Adafruit_GPS::Adafruit_GPS() {
+Adafruit_GPS::Adafruit_GPS(Stream *ser) {
   common_init();  // Set everything to common state, then...
-  //gpsHwSerial = ser; // ...override gpsHwSerial with value passed.
+  gpsHwSerial = ser; // ...override gpsHwSerial with value passed.
 }
 
 // Initialization code used by all constructor types
