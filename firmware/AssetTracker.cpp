@@ -125,10 +125,10 @@ Written by Limor Fried/Ladyada for Adafruit Industries.
 BSD license, check license.txt for more information
 All text above must be included in any redistribution
 ****************************************/
-#ifdef __AVR__
+//#ifdef __AVR__
   // Only include software serial on AVR platforms (i.e. not on Due).
-  #include <SoftwareSerial.h>
-#endif
+//  #include <SoftwareSerial.h>
+//#endif
 //#include <Adafruit_GPS.h>
 
 // how long are max NMEA lines to parse?
@@ -385,16 +385,16 @@ char Adafruit_GPS::read(void) {
   
   if (paused) return c;
 
-#ifdef __AVR__
-  if(gpsSwSerial) {
-    if(!gpsSwSerial->available()) return c;
-    c = gpsSwSerial->read();
-  } else 
+//#ifdef __AVR__
+//  if(gpsSwSerial) {
+//    if(!gpsSwSerial->available()) return c;
+//    c = gpsSwSerial->read();
+//  } else 
 #endif
-  {
-    if(!Serial1.available()) return c;
-    c = Serial1.read();
-  }
+//  {
+  if(!gpsHwSerial->available()) return c;
+  c = gpsHwSerial->read();
+//  }
 
   //Serial.print(c);
 
@@ -426,7 +426,7 @@ char Adafruit_GPS::read(void) {
 
   return c;
 }
-
+/*
 #ifdef __AVR__
 // Constructor when using SoftwareSerial or NewSoftSerial
 #if ARDUINO >= 100
@@ -439,7 +439,7 @@ Adafruit_GPS::Adafruit_GPS(NewSoftSerial *ser)
   gpsSwSerial = ser; // ...override gpsSwSerial with value passed.
 }
 #endif
-
+*/
 // Constructor when using HardwareSerial
 Adafruit_GPS::Adafruit_GPS(Stream *ser) {
   common_init();  // Set everything to common state, then...
@@ -448,10 +448,12 @@ Adafruit_GPS::Adafruit_GPS(Stream *ser) {
 
 // Initialization code used by all constructor types
 void Adafruit_GPS::common_init(void) {
+	/*
 #ifdef __AVR__
   gpsSwSerial = NULL; // Set both to NULL, then override correct
 #endif
-  //gpsHwSerial = NULL; // port pointer in corresponding constructor
+*/
+  gpsHwSerial = NULL; // port pointer in corresponding constructor
   recvdflag   = false;
   paused      = false;
   lineidx     = 0;
@@ -469,6 +471,7 @@ void Adafruit_GPS::common_init(void) {
 
 void Adafruit_GPS::begin(uint16_t baud)
 {
+	/*
 #ifdef __AVR__
   if(gpsSwSerial) 
     gpsSwSerial->begin(baud);
@@ -476,16 +479,20 @@ void Adafruit_GPS::begin(uint16_t baud)
     Serial1.begin(baud);
 #endif
   Serial1.begin(baud);
+  */
+      gpsHwSerial->begin(baud);
   delay(10);
 }
 
 void Adafruit_GPS::sendCommand(const char *str) {
+	/*
 #ifdef __AVR__
   if(gpsSwSerial) 
     gpsSwSerial->println(str);
   else    
 #endif
-    Serial1.println(str);
+*/
+    gpsHwSerial->println(str);
 }
 
 boolean Adafruit_GPS::newNMEAreceived(void) {
