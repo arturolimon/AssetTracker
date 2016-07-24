@@ -1,5 +1,6 @@
 #include "AssetTracker.h"
 #include "math.h"
+#include <ctype.h>
 
 //----------------- Tracker ----------------//
 
@@ -480,7 +481,7 @@ void Adafruit_GPS::begin(uint16_t baud)
 #endif
   Serial1.begin(baud);
   */
-      gpsHwSerial->begin(baud);
+  //    gpsHwSerial->begin(baud);
   delay(10);
 }
 
